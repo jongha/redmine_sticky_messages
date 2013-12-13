@@ -1,4 +1,5 @@
 = Redmine Sticky Messages
+{<img src="https://gemnasium.com/jongha/redmine_sticky_messages.png" alt="Dependency Status" />}[https://gemnasium.com/jongha/redmine_sticky_messages]
 
 Plugin to show site-wide message from sticky messages on forum.
 
