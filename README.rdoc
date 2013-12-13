@@ -17,6 +17,6 @@ Plugin to show site-wide message from sticky messages on forum.
 2. (Re)start Redmine.
 
 
-= License
+== License
 
 redmine_sticky_messages is available under the terms of the MIT License.
