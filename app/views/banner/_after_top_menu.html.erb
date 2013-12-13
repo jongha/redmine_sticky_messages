@@ -1,0 +1,22 @@
+<%
+-%>
+<%
+  messages = Message.find(
+                          :all,
+                          :limit => 3,
+                          :conditions => "sticky = 1 and parent_id is null",
+                          :order => "created_on desc",
+                          :include => [:author, :board]
+                         )
+%>
+<div id="_sticky_messages" class="issue">
+  <% messages.each do |m| %>
+    <ul><li><a href="/boards/<%= m.board_id %>/topics/<%= m.id %>?r=<%= m.parent_id %>"><%= m.subject %></a></li></ul>
+  <% end %>
+</div>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#_sticky_messages').prependTo('div#content');
+  });
+</script>
+

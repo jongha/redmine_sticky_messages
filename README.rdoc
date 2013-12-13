@@ -1,0 +1,22 @@
+= Redmine Sticky Messages
+
+Plugin to show site-wide message from sticky messages on forum.
+
+
+=== Plugin installation
+
+1. Copy the plugin directory into the plugins directory.
+
+2. (Re)start Redmine.
+
+
+=== Uninstall
+
+1. Remove the plugin directory into the plugins directory.
+
+2. (Re)start Redmine.
+
+
+= License
+
+redmine_sticky_messages is available under the terms of the MIT License.
