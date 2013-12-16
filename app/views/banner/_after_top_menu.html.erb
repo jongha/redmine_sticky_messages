@@ -11,27 +11,29 @@ unless User.current.name == 'Anonymous'
                 :order => "created_on desc",
                 :include => [:author, :board]
                )
-  %>
-  <div id="_sticky_messages" class="issue sticky_messages-area">
-    <% messages.each do |m| %>
-      <ul><li><a href="/boards/<%= m.board_id %>/topics/<%= m.id %>?r=<%= m.parent_id %>"><%= m.subject %></a></li></ul>
-    <% end %>
-    <a class="sticky_messages-off" href="#" title=""><%= l(:label_off) %></a>
-  </div>
 
-  <script type="text/javascript">
-    $(document).ready(function() {
-      if(StickyMessagesCookie._dispatcher({ type: "get", key: "_sticky_messages-off" }) !== "1") {
-        $('#_sticky_messages').prependTo('div#content').show();
-      
-        $(".sticky_messages-off").bind("click", function() {
-          StickyMessagesCookie._dispatcher({ type: "set", key: "_sticky_messages-off", data: "1" });
-          $("#_sticky_messages").slideUp(300, function() {
-              $(this).remove();
+  unless messages.length == 0
+%>
+    <div id="_sticky_messages" class="issue sticky_messages-area">
+      <% messages.each do |m| %>
+        <ul><li><a href="/boards/<%= m.board_id %>/topics/<%= m.id %>?r=<%= m.parent_id %>"><%= m.subject %></a></li></ul>
+      <% end %>
+      <a class="sticky_messages-off" href="#" title=""><%= l(:label_off) %></a>
+    </div>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        if(StickyMessagesCookie._dispatcher({ type: "get", key: "_sticky_messages-off" }) !== "1") {
+          $('#_sticky_messages').prependTo('div#content').show();
+
+          $(".sticky_messages-off").bind("click", function() {
+            StickyMessagesCookie._dispatcher({ type: "set", key: "_sticky_messages-off", data: "1" });
+            $("#_sticky_messages").slideUp(300, function() {
+                $(this).remove();
+            });
           });
-        });
-      }
-    });
-  </script>
+        }
+      });
+    </script>
+  <% end %>
 <% end %>
-
