@@ -1,3 +1,6 @@
+require 'redmine'
+require 'sticky_messages_application_hooks'
+
 Redmine::Plugin.register :redmine_sticky_messages do
   name 'Redmine Sticky Messages plugin'
   author 'Jong-Ha Ahn'

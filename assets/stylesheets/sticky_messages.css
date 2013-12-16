@@ -1,0 +1,11 @@
+.sticky_messages-area {
+    position: relative;
+    display: none;
+}
+
+.sticky_messages-off { 
+    position: absolute;
+    right: 10px;
+    display: block;
+    bottom: 5px;
+}
