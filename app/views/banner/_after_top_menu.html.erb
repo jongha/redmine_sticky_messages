@@ -16,7 +16,7 @@ unless User.current.name == 'Anonymous'
 %>
     <div id="_sticky_messages" class="issue sticky_messages-area">
       <% messages.each do |m| %>
-        <ul><li><a href="/boards/<%= m.board_id %>/topics/<%= m.id %>?r=<%= m.parent_id %>"><%= m.subject %></a></li></ul>
+        <ul><li><a href="/boards/<%= m.board_id %>/topics/<%= m.id %>?r=<%= m.parent_id %>"><%= m.subject %><% unless m.replies_count == 0 %> [<%= m.replies_count %>]<% end %></a></li></ul>
       <% end %>
       <a class="sticky_messages-off" href="#" title=""><%= l(:label_off) %></a>
     </div>
