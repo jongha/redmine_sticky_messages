@@ -4,7 +4,7 @@
 
 <%
 unless User.current.name == 'Anonymous'
-    messages = Message.find(
+  messages = Message.find(
                 :all,
                 :limit => 3,
                 :conditions => "sticky = 1 and parent_id is null",
