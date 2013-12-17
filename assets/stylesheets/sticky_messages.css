@@ -1,11 +1,12 @@
 .sticky_messages-area {
-    position: relative;
     display: none;
 }
 
-.sticky_messages-off { 
-    position: absolute;
-    right: 10px;
-    display: block;
-    bottom: 5px;
+._sticky_messages ul {
+    padding: 0px 0px 0px 10px;
+}
+
+._sticky_messages a {
+    color: rgb(130, 98, 0);
+    font-size: 12px;
 }

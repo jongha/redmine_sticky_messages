@@ -4,36 +4,26 @@
 
 <%
 unless User.current.name == 'Anonymous'
-  messages = Message.find(
+    messages = Message.find(
                 :all,
                 :limit => 3,
-                :conditions => "sticky = 1 and parent_id is null",
+                :conditions => "sticky = 0 and parent_id is null",
                 :order => "created_on desc",
                 :include => [:author, :board]
                )
 
   unless messages.length == 0
 %>
-    <div id="_sticky_messages" class="issue sticky_messages-area">
-      <% messages.each do |m| %>
-        <ul><li><a href="/boards/<%= m.board_id %>/topics/<%= m.id %>?r=<%= m.parent_id %>"><%= m.subject %><% unless m.replies_count == 0 %> [<%= m.replies_count %>]<% end %></a></li></ul>
-      <% end %>
-      <a class="sticky_messages-off" href="#" title=""><%= l(:label_off) %></a>
+    <div class="sticky_messages-area">
+      <div class="_sticky_messages">
+        <strong><%= l(:label_message) %></strong>
+        <% messages.each do |m| %>
+          <ul><li><a href="/boards/<%= m.board_id %>/topics/<%= m.id %>?r=<%= m.parent_id %>"><%= m.subject %><% unless m.replies_count == 0 %> [<%= m.replies_count %>]<% end %></a></li></ul>
+        <% end %>
+      </div>
+      <label id="_sticky_messages-ok"><%= l(:label_ok) %></label>
+      <label id="_sticky_messages-off"><%= l(:label_off) %></label>
     </div>
-
-    <script type="text/javascript">
-      $(document).ready(function() {
-        if(StickyMessagesCookie._dispatcher({ type: "get", key: "_sticky_messages-off" }) !== "1") {
-          $('#_sticky_messages').prependTo('div#content').show();
-
-          $(".sticky_messages-off").bind("click", function() {
-            StickyMessagesCookie._dispatcher({ type: "set", key: "_sticky_messages-off", data: "1" });
-            $("#_sticky_messages").slideUp(300, function() {
-                $(this).remove();
-            });
-          });
-        }
-      });
-    </script>
-  <% end %>
+  <% end %>  
 <% end %>
+

@@ -1,3 +1,5 @@
 # English strings go here for Rails i18n
-en:
+ko:
+  label_ok: "확인"
   label_off: "끄기"
+  label_message: "공지사항"

@@ -1,0 +1,3 @@
+[submodule "assets/noty"]
+	path = assets/noty
+	url = https://github.com/needim/noty.git

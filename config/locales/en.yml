@@ -1,3 +1,5 @@
 # English strings go here for Rails i18n
 en:
+  label_ok: "Ok"
   label_off: "Close"
+  label_message: "Messages"
