@@ -3,7 +3,7 @@
 -%>
 
 <%
-unless User.current.name == 'Anonymous'
+unless User.current.login == ''
     messages = Message.find(
                 :all,
                 :limit => 3,
