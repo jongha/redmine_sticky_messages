@@ -66,7 +66,7 @@ $(document).ready(function() {
         theme: 'defaultTheme',
         type: 'warning',
         text: '',
-        dismissQueue: false, // If you want to use queue feature set this true
+        dismissQueue: true, // If you want to use queue feature set this true
         template: '<div class="noty_message"><span class="noty_text"></span><div class="noty_close"></div></div>',
         animation: {
             open: {height: 'toggle'},
@@ -86,17 +86,47 @@ $(document).ready(function() {
             onClose: function() {},
             afterClose: function() {}
         },
-        buttons: [
-            {
-                addClass: 'btn btn-danger', text: $("#_sticky_messages-ok").text(), onClick: function($noty) {
-                    StickyMessagesCookie._dispatcher({ type: "set", key: "_sticky_messages-off", data: "1" });
-                    $noty.close();
-                }
-            }
-        ]
+        buttons: false
     };
-    
-    if($('._sticky_messages').length > 0 && StickyMessagesCookie._dispatcher({ type: "get", key: "_sticky_messages-off" }) !== "1") {
-        noty({ text: $($('._sticky_messages')[0]).clone().show()[0].outerHTML });
+
+    if($('._sticky_messages').length > 0) {
+        var cookieKey = "_sticky_messages-dismiss";
+        var flag = StickyMessagesCookie._dispatcher({ type: "get", key: cookieKey });
+        var nflag = !!!flag || flag === "" ? 0 : parseInt(flag);
+
+        var dismissButtonClick = function($noty) {
+            var flag = StickyMessagesCookie._dispatcher({ type: "get", key: cookieKey });
+            var nflag = parseInt($noty.options._flag);
+
+            if(flag !== "") {
+                nflag |= parseInt(flag);
+            }
+
+            StickyMessagesCookie._dispatcher({ type: "set", key: cookieKey, data: nflag });
+            $noty.close();
+        };
+
+        var i = 0;
+        var len = $("._sticky_messages").length;
+
+        for(i=0; i<len; ++i) {
+            var obj = $($("._sticky_messages")[i]);
+            var _flag = obj.data("flag");
+
+            if((nflag & _flag) !== _flag) {
+                noty({
+                    text: obj.clone().show()[0].outerHTML,
+                    type: "warning",
+                    _flag: _flag,
+                    dismissQueue: i < (len - 1),
+                    buttons: [
+                        {
+                            addClass: 'btn btn-danger',
+                            text: $("#_sticky_messages-dismiss").text(),
+                            onClick: dismissButtonClick
+                        }
+                    ]});
+            }
+        }
     };
 });

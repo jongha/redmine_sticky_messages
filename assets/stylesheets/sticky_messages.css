@@ -6,7 +6,12 @@
     padding: 0px 0px 0px 10px;
 }
 
-._sticky_messages a {
+._sticky_messages-news a {
+    color: rgb(130, 98, 0);
+    font-size: 12px;
+}
+
+._sticky_messages-messages a {
     color: rgb(130, 98, 0);
     font-size: 12px;
 }
