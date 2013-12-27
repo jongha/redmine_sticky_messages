@@ -16,7 +16,7 @@ var StickyMessagesCookie = {
 
         var expire = new Date();
         expire.setDate(expire.getDate() + 1); // for 1 day.
-        document.cookie = (key + '=' + val + "; path=/");
+        document.cookie = (key + '=' + val + "; path=/; expires=" + expire.toGMTString());
     },
     _empty: function() {
         "use strict";
@@ -72,7 +72,7 @@ $(document).ready(function() {
             open: {height: 'toggle'},
             close: {height: 'toggle'},
             easing: 'swing',
-            speed: 200 // opening & closing animation speed
+            speed: 500 // opening & closing animation speed
         },
         timeout: true, // delay for closing event. Set false for sticky notifications
         force: false, // adds notification to the beginning of queue when set to true
@@ -131,7 +131,7 @@ $(document).ready(function() {
                         ],
                         callback: {
                             afterShow: function() {
-                                setTimeout(function() { showMessage(++i); }, 500);
+                                setTimeout(function() { showMessage(++i); }, 1000);
                             }
                         }
                         });
