@@ -127,7 +127,7 @@ $(document).ready(function() {
                                 addClass: 'btn btn-danger',
                                 text: $("#_sticky_messages-dismiss").text(),
                                 onClick: dismissButtonClick
-                            },
+                            }
                         ],
                         callback: {
                             afterShow: function() {
