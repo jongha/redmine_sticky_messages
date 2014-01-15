@@ -3,13 +3,13 @@
 
 Plugin to show site-wide message from sticky messages on forum. This plugin shows the latest messages of forum. It is useful if you announce the latest messages to every Redmine user. I was made for use in the Redmine in the internal network of the company. However, it is useful for someone. It is very simple to use.
 
-=== Plugin installation
+== Plugin installation
 
 1. Copy the plugin directory into the plugins directory.
 
 2. (Re)start Redmine.
 
-=== Uninstall
+== Uninstall
 
 1. Remove the plugin directory into the plugins directory.
 
