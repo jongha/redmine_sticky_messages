@@ -3,6 +3,10 @@
 
 Plugin to show site-wide message from sticky messages on forum. This plugin shows the latest messages of forum. It is useful if you announce the latest messages to every Redmine user. I was made for use in the Redmine in the internal network of the company. However, it is useful for someone. It is very simple to use.
 
+== Screenshot
+
+{<img src="https://raw.github.com/jongha/redmine_sticky_messages/master/screenshot/screenshot.png" alt="Screenshot" />}[https://raw.github.com/jongha/redmine_sticky_messages/master/screenshot/screenshot.png]
+
 == Plugin installation
 
 1. Copy the plugin directory into the plugins directory.
