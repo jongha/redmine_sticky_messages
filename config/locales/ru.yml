@@ -1,0 +1,6 @@
+# Russian strings go here for Rails i18n
+ru:
+  label_ok: "Ok"
+  label_dismiss: "Скрыть"
+  label_news: "Новости"
+  label_message: "Сообщения"
