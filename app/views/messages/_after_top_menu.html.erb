@@ -18,7 +18,7 @@ unless User.current.login == ''
       <div class="_sticky_messages _sticky_messages-news" data-flag="1">
         <strong><%= l(:label_news) %></strong>
         <% messages.each do |m| %>
-          <ul><li><a href="/news/<%= m.id %>"><%= m.title %><% unless m.comments_count == 0 %> [<%= m.comments_count %>]<% end %></a></li></ul>
+          <ul><li><a href="<%=url_for :controller => 'welcome' %>news/<%= m.id %>"><%= m.title %><% unless m.comments_count == 0 %> [<%= m.comments_count %>]<% end %></a></li></ul>
         <% end %>
       </div>
     <% end %>
@@ -37,7 +37,7 @@ unless User.current.login == ''
       <div class="_sticky_messages _sticky_messages-messages" data-flag="2">
         <strong><%= l(:label_message) %></strong>
         <% messages.each do |m| %>
-          <ul><li><a href="/boards/<%= m.board_id %>/topics/<%= m.id %>?r=<%= m.parent_id %>"><%= m.subject %><% unless m.replies_count == 0 %> [<%= m.replies_count %>]<% end %></a></li></ul>
+          <ul><li><a href="<%=url_for :controller => 'welcome' %>boards/<%= m.board_id %>/topics/<%= m.id %>?r=<%= m.parent_id %>"><%= m.subject %><% unless m.replies_count == 0 %> [<%= m.replies_count %>]<% end %></a></li></ul>
         <% end %>
       </div>
     <% end %>
