@@ -15,3 +15,10 @@
     color: rgb(130, 98, 0);
     font-size: 12px;
 }
+
+.sticky_message-area-reset {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}

@@ -90,9 +90,12 @@ $(document).ready(function() {
     };
 
     if($('._sticky_messages').length > 0) {
+
         var cookieKey = "_sticky_messages-dismiss";
-        var flag = StickyMessagesCookie._dispatcher({ type: "get", key: cookieKey });
-        var nflag = !!!flag || flag === "" ? 0 : parseInt(flag);
+        var i = 0;
+        var len = $("._sticky_messages").length;
+        var active = 0;
+
 
         var dismissButtonClick = function($noty) {
             var flag = StickyMessagesCookie._dispatcher({ type: "get", key: cookieKey });
@@ -106,15 +109,34 @@ $(document).ready(function() {
             $noty.close();
         };
 
+        var resetDismiss = function() {
+            if(active === 0) {
+                var obj = $(".sticky_message-area-reset");
 
-        var i = 0;
-        var len = $("._sticky_messages").length;
+                obj.show()
+                    .find("button")
+                    .unbind("click")
+                    .bind("click", function() {
+                        StickyMessagesCookie._dispatcher({ type: "set", key: cookieKey, data: 0 });
+
+                        obj.hide();
+
+                        showMessage(0);
+                    }
+                );
+            }
+        };
 
         var showMessage = function(i) {
+            if(i === 0) { active = 0; }
+
             if(i < len) {
                 var obj = $($("._sticky_messages")[i]);
                 var _flag = obj.data("flag");
                 var _list = [];
+
+                var flag = StickyMessagesCookie._dispatcher({ type: "get", key: cookieKey });
+                var nflag = !!!flag || flag === "" ? 0 : parseInt(flag);
 
                 if((nflag & _flag) !== _flag) {
                     noty({
@@ -132,14 +154,24 @@ $(document).ready(function() {
                         callback: {
                             afterShow: function() {
                                 setTimeout(function() { showMessage(++i); }, 1000);
+                            },
+                            afterClose: function() {
+                                --active;
+
+                                resetDismiss();
                             }
                         }
                         });
+
+                    ++active;
                 }else {
                     showMessage(++i);
                 }
             }
         };
+
         showMessage(i);
+
+        resetDismiss();
     };
 });
