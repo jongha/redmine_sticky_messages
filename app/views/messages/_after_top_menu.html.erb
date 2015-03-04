@@ -6,41 +6,39 @@ unless User.current.login == ''
 %>
   <div class="sticky_messages-area">
 <%
-  messages = News.find(
-                :all,
-                :limit => 2,
-                :order => "created_on desc",
-                :include => [:author]
-               )
 
-    unless messages.length == 0
+  messages = News
+    .order('created_on desc')
+    .limit(2)
+    .all
+
+  unless messages.count == 0
 %>
-      <div class="_sticky_messages _sticky_messages-news" data-flag="1">
-        <strong><%= l(:label_news) %></strong>
-        <% messages.each do |m| %>
-          <ul><li><a href="<%=url_for :controller => 'welcome' %>news/<%= m.id %>"><%= m.title %><% unless m.comments_count == 0 %> [<%= m.comments_count %>]<% end %></a></li></ul>
-        <% end %>
-      </div>
-    <% end %>
-
-<%
-  messages = Message.find(
-                :all,
-                :limit => 3,
-                :conditions => "sticky = 1 and parent_id is null",
-                :order => "created_on desc",
-                :include => [:author, :board]
-               )
-
-    unless messages.length == 0
+    <div class="_sticky_messages _sticky_messages-news" data-flag="1">
+      <strong><%= l(:label_news) %></strong>
+      <% messages.each do |m| %>
+        <ul><li><a href="<%=url_for :controller => 'welcome' %>news/<%= m.id %>"><%= m.title %><% unless m.comments_count == 0 %> [<%= m.comments_count %>]<% end %></a></li></ul>
+      <% end %>
+    </div>
+<% 
+  end
+  
+  messages = Message
+    .where('sticky = 1 and parent_id is null')
+    .order('created_on desc')
+    .limit(3)
+    .all
+  
+  unless messages.count == 0
 %>
-      <div class="_sticky_messages _sticky_messages-messages" data-flag="2">
-        <strong><%= l(:label_message) %></strong>
-        <% messages.each do |m| %>
-          <ul><li><a href="<%=url_for :controller => 'welcome' %>boards/<%= m.board_id %>/topics/<%= m.id %>?r=<%= m.parent_id %>"><%= m.subject %><% unless m.replies_count == 0 %> [<%= m.replies_count %>]<% end %></a></li></ul>
-        <% end %>
-      </div>
-    <% end %>
+    <div class="_sticky_messages _sticky_messages-messages" data-flag="2">
+      <strong><%= l(:label_message) %></strong>
+      <% messages.each do |m| %>
+        <ul><li><a href="<%=url_for :controller => 'welcome' %>boards/<%= m.board_id %>/topics/<%= m.id %>?r=<%= m.parent_id %>"><%= m.subject %><% unless m.replies_count == 0 %> [<%= m.replies_count %>]<% end %></a></li></ul>
+      <% end %>
+    </div>
+    
+<% end %>
 
     <label id="_sticky_messages-ok"><%= l(:label_ok) %></label>
     <label id="_sticky_messages-dismiss"><%= l(:label_dismiss) %></label>
