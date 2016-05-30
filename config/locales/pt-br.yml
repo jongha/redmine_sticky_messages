@@ -1,0 +1,6 @@
+# Portuguese Brazil strings go here for Rails i18n
+pt-br:
+  label_ok: "Ok"
+  label_dismiss: "Ocultar"
+  label_news: "Noticias"
+  label_message: "Mensagens"
