@@ -1,0 +1,6 @@
+# Spanish strings go here for Rails i18n
+es:
+  label_ok: "Aceptar"
+  label_dismiss: "Descartar"
+  label_news: "Noticias"
+  label_message: "Mensajes"
